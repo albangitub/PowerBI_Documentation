@@ -1,0 +1,35 @@
+<!-- Code to run to get PowerBI Report Documentation: get information on columns ! -->
+
+DEFINE
+
+    VAR _tables =
+
+        SELECTCOLUMNS (
+          FILTER(
+          INFO.TABLES (),
+          // exclude hidden tables
+          [IsHidden] = FALSE()
+          ),
+        "TableID", [ID], 
+        "TableName", [Name] 
+      )
+
+    VAR _columns =
+
+        FILTER ( INFO.COLUMNS (), [Type] <> 3 )
+
+    VAR _result =
+
+        SELECTCOLUMNS (
+
+            NATURALINNERJOIN ( _columns, _tables ),
+            "Table", [TableName],
+            "Column Name", IF ( ISBLANK ( [ExplicitName] ), [SourceColumn], [ExplicitName] ),
+            "Column Type", SWITCH ( [Type], 1, "Data column", 2, "Calculated column", [Type] ),
+            "Data Category", [DataCategory],
+            "Description", [Description]
+        )
+
+EVALUATE
+
+  _result
