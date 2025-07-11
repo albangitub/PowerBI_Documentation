@@ -3,7 +3,7 @@
 # PowerBI_Documentation
 ## DAX Queries to document faster your PowerBI Reports
 
-How to build tables to document your PowerBI Report
+**How to build tables to document your PowerBI Report**
 <br>
 <br>
 In PowerBI Desktop, you can go to DAX query view and type in 
