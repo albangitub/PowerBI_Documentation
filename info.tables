@@ -1,0 +1,9 @@
+<!-- Code to run to get PowerBI Report Documentation: get information on tables ! -->
+
+EVALUATE
+	SELECTCOLUMNS(
+		INFO.TABLES(),
+		"TableID", [ID],
+		"Table", [Name],
+		"LastModifiedTime", [ModifiedTime]
+	)
